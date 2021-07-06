@@ -1,0 +1,17 @@
+var http = require('http'); 
+var url = 'http://api.openweathermap.org/data/2.5/weather?q=Jaipur&units=metric&appid=532a94837becd1330995159c9c2e3f97';
+
+var server = http.createServer(function(req,res){
+
+    var request= require('request');
+    request(url, function(err,ress, body){ 
+        var data= JSON.parse(body);
+        res.write("<html><body><div>");
+        res.write("<h1>"+'City name = '+data['name']+'<br>'+"</h1>");
+        res.write("<h2>"+'Temperature = '+data.main['temp']+'<br>'+"</h2>");
+        res.write("</div></body></html>");
+        
+        res.end();
+    });
+    
+}).listen(3000);
